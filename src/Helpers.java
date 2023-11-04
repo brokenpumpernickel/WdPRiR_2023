@@ -5,4 +5,11 @@ public class Helpers {
                 return false;
         return true;
     }
+
+    public static double fibon(double n) {
+        if(n < 2)
+            return n;
+
+        return fibon(n - 1) + fibon(n - 2);
+    }
 }
