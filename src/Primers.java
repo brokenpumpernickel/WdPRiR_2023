@@ -25,14 +25,14 @@ public class Primers {
         long start = System.nanoTime();
         Counter counter = new Counter();
 
-        Worker[] workers = new Worker[12];
+        Worker[] workers = new Worker[12]; // To jest zle - cale wykonanie sie serializuje
         for(int i = 0; i < workers.length; ++i) {
             workers[i] = new Worker(counter);
             workers[i].start();
-            workers[i].join();
+            workers[i].join(); // join blokuje kazda iteracje petli, az watek nie skonczy dzialac
         }
 
-//        for(int i = 0; i < workers.length; ++i)
+//        for(int i = 0; i < workers.length; ++i) // To wykomentowane natomiast dziala.
 //            workers[i].start();
 //
 //        for(int i = 0; i < workers.length; ++i)

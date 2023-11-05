@@ -1,5 +1,5 @@
 public class Helpers {
-    public static boolean isPrime(int i) {
+    public static boolean isPrime(int i) { // Nie robcie tego w domu!!!
         for(int j = 2; j < i; ++j)
             if(i % j == 0)
                 return false;
