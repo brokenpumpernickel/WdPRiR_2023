@@ -31,9 +31,24 @@ import java.util.concurrent.locks.ReentrantLock;
 //    }
 //}
 
+//public class Counter {
+//    private int count = 0;
+//    private ReentrantLock lock = new ReentrantLock();
+//
+//    public int getAndIncrement() {
+//        try {
+//            lock.lock();
+//            return count++;
+//        } finally {
+//            lock.unlock();
+//        }
+//
+//    }
+//}
+
 public class Counter {
     private int count = 0;
-    private ReentrantLock lock = new ReentrantLock();
+    private TestAndSetLock lock = new TestAndSetLock();
 
     public int getAndIncrement() {
         try {
@@ -44,5 +59,8 @@ public class Counter {
         }
 
     }
-}
 
+    public int getCount() {
+        return count;
+    }
+}

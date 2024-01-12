@@ -1,16 +1,18 @@
-public class Primers {
-    public static class Worker extends Thread {
-        private Counter counter;
+import java.util.concurrent.atomic.AtomicInteger;
 
-        public Worker(Counter counter) {
-            this.counter = counter;
+public class AtomicPrimers {
+    public static class Worker extends Thread {
+        private AtomicInteger atomicInteger;
+
+        public Worker(AtomicInteger atomicInteger) {
+            this.atomicInteger = atomicInteger;
         }
 
         @Override
         public void run() {
             int number;
             int count = 0;
-            while ((number = counter.getAndIncrement()) < 1000000) {
+            while ((number = atomicInteger.getAndIncrement()) < 1000000) {
                 if(Helpers.isPrime(number)) {
                     System.out.println(number);
                 }
@@ -23,11 +25,11 @@ public class Primers {
 
     public static void main(String[] args) throws InterruptedException {
         long start = System.nanoTime();
-        Counter counter = new Counter();
+        AtomicInteger atomicInteger = new AtomicInteger();
 
         Worker[] workers = new Worker[12];
         for(int i = 0; i < workers.length; ++i) {
-            workers[i] = new Worker(counter);
+            workers[i] = new Worker(atomicInteger);
         }
 
         for(int i = 0; i < workers.length; ++i)
@@ -37,7 +39,6 @@ public class Primers {
             workers[i].join();
 
         long end = System.nanoTime();
-        System.out.println("Time: " + (end - start) / 1000000000.0 + " count: " + counter.getCount());
-
+        System.out.println("Time: " + (end - start) / 1000000000.0);
     }
 }
